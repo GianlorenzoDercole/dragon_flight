@@ -32,14 +32,14 @@ class Crawler {
 
 
 //hero of
-const hero = new Crawler(5, 5, 'hotpink', 30, 30)
+const goodDragon = new Crawler(5, 250, 'hotpink', 30, 30)
 // hero.render()
 //montster
 const randX = Math.floor(Math.random() * canvas.width)
 const randY = Math.floor(Math.random() * canvas.height)
 const ogre = new Crawler(randX, randY, 'green', 75, 110)
 // ogre.render()
-const dragon_arr  = ['y','u','i']
+
     // function generate_dragon(){
     //     const randX = Math.floor(Math.random() * canvas.width)
     //     const randY = Math.floor(Math.random() * canvas.height)
@@ -47,15 +47,68 @@ const dragon_arr  = ['y','u','i']
 
     // }
     // generate_dragon()
-    const a = [d = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30),d = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30)]
-    for (let i = 0; i < dragon_arr.length; i++){
-        const randX = Math.floor(Math.random() * canvas.width)
-        const randY = Math.floor(Math.random() * canvas.height)
-        // d = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30)
-        // console.log(d)
-        a.push(d = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+    const finishLine = new Crawler((canvas.width + 2000), 0, 'white', 30, canvas.height )
+    const dragonArray = []
+    function dragons() {
+
+            for (let i = 0; i < 11; i++){
+
+                //dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+                dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 1000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+                dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 2000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+
+            }
 
     }
+    function dragons2() {
+
+        for (let i = 0; i < 11; i++){
+
+            //dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+            dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 3000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+            dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 4000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+
+        }
+
+}
+function dragons3() {
+
+    for (let i = 0; i < 11; i++){
+
+        //dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 5000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 6000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+
+    }
+
+}
+function dragons4() {
+
+    for (let i = 0; i < 11; i++){
+
+        //dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 7000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 8000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+
+    }
+
+}
+function dragons5() {
+
+    for (let i = 0; i < 11; i++){
+
+        //dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 9000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+        dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * (canvas.width )+ 10000), Math.floor(Math.random() * canvas.height), 'green', 30, 30))
+
+    }
+
+}
+dragons()
+dragons2()
+dragons3()
+dragons4()
+dragons5()
 
 const dragon = new Crawler(1000,100, 'green', 30, 30)
 const dragon2 = new Crawler(500,200, 'green', 30, 30)
@@ -72,54 +125,83 @@ function movementHandler(e) {
 
     switch(e.key) {
         case('w'):
-        hero.y = hero.y -speed
+        goodDragon.y = goodDragon.y -speed
         break
         case('s'):
-        hero.y = hero.y + speed
+        goodDragon.y = goodDragon.y + speed
         break
         case('a'):
-        hero.x = hero.x - speed
+        goodDragon.x = goodDragon.x - speed
         break
         case('d'):
-        hero.x = hero.x + speed
+        goodDragon.x = goodDragon.x + speed
         break
     }
-    movementDisplay.innerText = `x: ${hero.x} y: ${hero.y}`
+    //movementDisplay.innerText = `x: ${hero.x} y: ${hero.y}`
     // hero.render()
 }
-a.push(d = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 120, 120))
+dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 120, 120))
 // all of the game logic is executed every frame
-function detectHit() {
-    if(hero.x + hero.width >= ogre.x &&
-        hero.x <= ogre.x + ogre.width&&
-        hero.y + hero.height >= ogre.y &&
-        hero.y <= ogre.y + ogre.height
-    ){
-        ogre.alive = false
-        movementDisplay.innerText = 'you killed shrek'
-    }
-}
-function detectcol() {
-    if(hero.x + hero.width >= d.x &&
-        hero.x <= d.x + d.width&&
-        hero.y + hero.height >= d.y &&
-        hero.y <= d.y + d.height
-    ){
-        ogre.alive = false
-        movementDisplay.innerText = 'you killed shrek'
-    }
-}
+// function detectHit() {
+//     if(hero.x + hero.width >= ogre.x &&
+//         hero.x <= ogre.x + ogre.width&&
+//         hero.y + hero.height >= ogre.y &&
+//         hero.y <= ogre.y + ogre.height
+//     ){
+//         ogre.alive = false
+//         movementDisplay.innerText = 'you killed shrek'
+//     }
+// }
+// function detectcol() {
+//     if(hero.x + hero.width >= d.x &&
+//         hero.x <= d.x + d.width&&
+//         hero.y + hero.height >= d.y &&
+//         hero.y <= d.y + d.height
+//     ){
+//         ogre.alive = false
+//         movementDisplay.innerText = 'you killed shrek'
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 function gameLoop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    detectHit()
+    // detectHit()
     // if(ogre.alive){
     //     ogre.render()
     // }
 
-    dragon.render()
+    finishLine.render()
+    finishLine.x -= 5
+    // dragon.render()
 
     // dragon2.render()
     // dragon2.x -= 5
@@ -127,14 +209,18 @@ function gameLoop(){
     food.x -= 1
     // dragon.x -= 5
     // dragon3.render()
-    dragon3.x -= 5
-    for (let i = 0 ; i < a.length; i++){
-        a[i].render()
-        a[i].x -=5
-        detectcol()
+    // dragon3.x -= 5
+    for (let i = 0 ; i < dragonArray.length; i++){
+        dragonArray[i].render()
+        dragonArray[i].x -=5
+        // if(dragonArray[i].x < 0){
+        //     dragonArray.pop(dragonArray[i])
+        // }
+
     }
-    hero.render()
-    hero.y += 1
+    // detectcol()
+    goodDragon.render()
+    //goodDragon.y += 1
 
 
 }
