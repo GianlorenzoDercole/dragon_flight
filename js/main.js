@@ -30,7 +30,7 @@ class Crawler {
     }
 }
 
-
+// context.draw create image set source and size
 //hero of
 const goodDragon = new Crawler(5, 250, 'hotpink', 30, 30)
 // hero.render()
@@ -47,7 +47,7 @@ const ogre = new Crawler(randX, randY, 'green', 75, 110)
 
     // }
     // generate_dragon()
-    const finishLine = new Crawler((canvas.width + 2000), 0, 'white', 30, canvas.height )
+    const finishLine = new Crawler((canvas.width + 11000), 0, 'white', 30, canvas.height )
     const dragonArray = []
     function dragons() {
 
@@ -110,9 +110,7 @@ dragons3()
 dragons4()
 dragons5()
 
-const dragon = new Crawler(1000,100, 'green', 30, 30)
-const dragon2 = new Crawler(500,200, 'green', 30, 30)
-const dragon3 = new Crawler(600,300, 'green', 30, 30)
+
 const food = new Crawler(300,300, 'yellow', 30, 30)
 function drawBox(x , y, w, h, color) {
     ctx.fillStyle = color
@@ -140,7 +138,7 @@ function movementHandler(e) {
     //movementDisplay.innerText = `x: ${hero.x} y: ${hero.y}`
     // hero.render()
 }
-dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 120, 120))
+//dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 120, 120))
 // all of the game logic is executed every frame
 // function detectHit() {
 //     if(hero.x + hero.width >= ogre.x &&
@@ -152,16 +150,21 @@ dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width
 //         movementDisplay.innerText = 'you killed shrek'
 //     }
 // }
-// function detectcol() {
-//     if(hero.x + hero.width >= d.x &&
-//         hero.x <= d.x + d.width&&
-//         hero.y + hero.height >= d.y &&
-//         hero.y <= d.y + d.height
-//     ){
-//         ogre.alive = false
-//         movementDisplay.innerText = 'you killed shrek'
-//     }
-// }
+function detectcol() {
+    if(goodDragon.x + goodDragon.width >= food.x &&
+        goodDragon.x <= food.x + food.width&&
+        goodDragon.y + goodDragon.height >= food.y &&
+        goodDragon.y <= food.y + food.height
+    ){
+        console.log('t')
+        food.alive = false
+        movementDisplay.innerText = 'food'
+    }
+    if (goodDragon.x >finishLine.x && goodDragon.alive == true){
+        movementDisplay.innerText = 'you win'
+        goodDragon.alive = false
+    }
+}
 
 
 
@@ -184,48 +187,51 @@ dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width
 
 
 
+function detectDragons() {
+    for (let i = 0; i < dragonArray.length; i++){
+        if(goodDragon.x + goodDragon.width >= dragonArray[i].x &&
+            goodDragon.x <= dragonArray[i].x + dragonArray[i].width&&
+            goodDragon.y + goodDragon.height >= dragonArray[i].y &&
+            goodDragon.y <= dragonArray[i].y + dragonArray[i].height
+        ){
+            goodDragon.alive = false
+            movementDisplay.innerText = 'lose'
+        }
+    }
 
-
-
-
-
-
-
+}
 
 function gameLoop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    // detectHit()
-    // if(ogre.alive){
-    //     ogre.render()
-    // }
+    if(goodDragon.alive == true) {
+        finishLine.render()
+    }
 
-    finishLine.render()
-    finishLine.x -= 5
-    // dragon.render()
+    finishLine.x -= 10
+    if( food.alive == true && goodDragon.alive == true) {
+        food.render()
+    }
 
-    // dragon2.render()
-    // dragon2.x -= 5
-    food.render()
     food.x -= 1
-    // dragon.x -= 5
-    // dragon3.render()
-    // dragon3.x -= 5
+
     for (let i = 0 ; i < dragonArray.length; i++){
-        dragonArray[i].render()
-        dragonArray[i].x -=5
-        // if(dragonArray[i].x < 0){
-        //     dragonArray.pop(dragonArray[i])
-        // }
+        if(goodDragon.alive == true){
+            dragonArray[i].render()
+        dragonArray[i].x -= 10
+        }
+
 
     }
-    // detectcol()
-    goodDragon.render()
-    //goodDragon.y += 1
+    if (goodDragon.alive == true){
+        goodDragon.render()
+    }
 
+    //goodDragon.y += 1
+    detectDragons()
+    detectcol()
 
 }
-/* Event Listeners*/
-//draw a box whenever you click on the canvas
+
 canvas.addEventListener('click', e => {
     // const red = Math.floor(Math.random() * 250)
     // const blue = Math.floor(Math.random() * 250)
