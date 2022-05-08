@@ -189,7 +189,12 @@ function detectcol() {
 
 
 
-
+function wallCol() {
+    if (goodDragon.y > canvas.height - 30 || goodDragon.y < 0){
+        goodDragon.alive = false
+        movementDisplay.innerText = 'lose'
+    }
+}
 function detectDragons() {
     for (let i = 0; i < dragonArray.length; i++){
         if(goodDragon.x + goodDragon.width >= dragonArray[i].x &&
@@ -197,8 +202,9 @@ function detectDragons() {
             goodDragon.y + goodDragon.height >= dragonArray[i].y &&
             goodDragon.y <= dragonArray[i].y + dragonArray[i].height
         ){
-            goodDragon.alive = false
             movementDisplay.innerText = 'lose'
+            goodDragon.alive = false
+
         }
     }
 
@@ -206,6 +212,7 @@ function detectDragons() {
 score = 0
 
 function gameLoop(){
+
     scoreDisplay.innerText = score
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -268,7 +275,7 @@ if(food2.alive === false && food3.alive ===false){
 if( food.alive === false && food2.alive === false && food3.alive === false){
     score = 300
 }
-
+wallCol()
 }
 
 canvas.addEventListener('click', e => {
