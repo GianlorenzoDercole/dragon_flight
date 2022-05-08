@@ -1,13 +1,10 @@
-/*DOM selectors */
-//canvas element
-const canvas = document.querySelector('#canvas')
-//hud for the player
-const movementDisplay = document.querySelector('#movement')
 
+const canvas = document.querySelector('#canvas')
+
+const movementDisplay = document.querySelector('#movement')
+const scoreDisplay = document.querySelector('#score')
 
 const ctx = canvas.getContext('2d')
-
-
 canvas.setAttribute('height', getComputedStyle(canvas)["height"])
 canvas.setAttribute('width', getComputedStyle(canvas)["width"])
 
@@ -30,15 +27,10 @@ class Crawler {
     }
 }
 
-// context.draw create image set source and size
-//hero of
 const goodDragon = new Crawler(5, 250, 'hotpink', 30, 30)
-// hero.render()
-//montster
+
 const randX = Math.floor(Math.random() * canvas.width)
 const randY = Math.floor(Math.random() * canvas.height)
-const ogre = new Crawler(randX, randY, 'green', 75, 110)
-// ogre.render()
 
     // function generate_dragon(){
     //     const randX = Math.floor(Math.random() * canvas.width)
@@ -112,6 +104,8 @@ dragons5()
 
 
 const food = new Crawler(300,300, 'yellow', 30, 30)
+const food2 = new Crawler(1000 ,Math.floor(Math.random() * canvas.height), 'yellow', 30, 30)
+const food3 = new Crawler(1250, Math.floor(Math.random() * canvas.height), 'yellow', 30, 30)
 function drawBox(x , y, w, h, color) {
     ctx.fillStyle = color
     ctx.fillRect(x, y, w, h)
@@ -135,36 +129,45 @@ function movementHandler(e) {
         goodDragon.x = goodDragon.x + speed
         break
     }
-    //movementDisplay.innerText = `x: ${hero.x} y: ${hero.y}`
-    // hero.render()
 }
-//dragonArray.push(badDragon = new Crawler(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height), 'green', 120, 120))
-// all of the game logic is executed every frame
-// function detectHit() {
-//     if(hero.x + hero.width >= ogre.x &&
-//         hero.x <= ogre.x + ogre.width&&
-//         hero.y + hero.height >= ogre.y &&
-//         hero.y <= ogre.y + ogre.height
-//     ){
-//         ogre.alive = false
-//         movementDisplay.innerText = 'you killed shrek'
-//     }
-// }
 function detectcol() {
+
     if(goodDragon.x + goodDragon.width >= food.x &&
         goodDragon.x <= food.x + food.width&&
         goodDragon.y + goodDragon.height >= food.y &&
         goodDragon.y <= food.y + food.height
     ){
-        console.log('t')
+        //score += 100
         food.alive = false
         movementDisplay.innerText = 'food'
+    }
+    if(goodDragon.x + goodDragon.width >= food2.x &&
+        goodDragon.x <= food2.x + food2.width&&
+        goodDragon.y + goodDragon.height >= food2.y &&
+        goodDragon.y <= food2.y + food2.height
+    )
+    {
+        //score += 100
+        food2.alive = false
+        movementDisplay.innerText = 'mmmmm'
+    }
+    if(goodDragon.x + goodDragon.width >= food3.x &&
+        goodDragon.x <= food3.x + food3.width&&
+        goodDragon.y + goodDragon.height >= food3.y &&
+        goodDragon.y <= food3.y + food3.height
+    )
+    {
+        //score += 100
+        food3.alive = false
+        movementDisplay.innerText = 'mmmmm'
     }
     if (goodDragon.x >finishLine.x && goodDragon.alive == true){
         movementDisplay.innerText = 'you win'
         goodDragon.alive = false
     }
 }
+
+
 
 
 
@@ -200,8 +203,11 @@ function detectDragons() {
     }
 
 }
+score = 0
 
 function gameLoop(){
+    scoreDisplay.innerText = score
+
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if(goodDragon.alive == true) {
         finishLine.render()
@@ -214,6 +220,17 @@ function gameLoop(){
 
     food.x -= 1
 
+    if( food2.alive == true && goodDragon.alive == true) {
+        food2.render()
+    }
+
+    food2.x -= 1
+    if( food3.alive == true && goodDragon.alive == true) {
+        food3.render()
+    }
+
+    food3.x -= 1
+
     for (let i = 0 ; i < dragonArray.length; i++){
         if(goodDragon.alive == true){
             dragonArray[i].render()
@@ -225,10 +242,32 @@ function gameLoop(){
     if (goodDragon.alive == true){
         goodDragon.render()
     }
-
     //goodDragon.y += 1
-    detectDragons()
+    scoreDisplay.innerText = score
     detectcol()
+    detectDragons()
+
+if( food.alive === false) {
+    score = 100
+}
+if( food2.alive === false){
+    score = 100
+}
+if (food3.alive === false){
+    score = 100
+}
+if(food.alive === false && food2.alive ===false){
+    score = 200
+}
+if(food.alive === false && food3.alive ===false){
+    score = 200
+}
+if(food2.alive === false && food3.alive ===false){
+    score = 200
+}
+if( food.alive === false && food2.alive === false && food3.alive === false){
+    score = 300
+}
 
 }
 
