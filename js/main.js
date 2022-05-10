@@ -7,7 +7,7 @@ const scoreDisplay = document.querySelector('#score')
 const ctx = canvas.getContext('2d')
 canvas.setAttribute('height', getComputedStyle(canvas)["height"])
 canvas.setAttribute('width', getComputedStyle(canvas)["width"])
-
+// keeps game playing consistently
 const gameLoopInterval = setInterval(gameLoop, 60)
 
 
@@ -26,11 +26,8 @@ class Crawler {
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
-
-const goodDragon = new Crawler(5, 250, 'hotpink', 30, 30)
-
-const randX = Math.floor(Math.random() * canvas.width)
-const randY = Math.floor(Math.random() * canvas.height)
+// dragon for player to control
+const goodDragon = new Crawler(5, 250, 'white', 30, 30)
 
     // function generate_dragon(){
     //     const randX = Math.floor(Math.random() * canvas.width)
@@ -39,7 +36,10 @@ const randY = Math.floor(Math.random() * canvas.height)
 
     // }
     // generate_dragon()
+
+    // finish line to detect game is won
     const finishLine = new Crawler((canvas.width + 11000), 0, 'white', 30, canvas.height )
+    //used in game loop to add dragons
     const dragonArray = []
     function dragons() {
 
@@ -62,7 +62,7 @@ const randY = Math.floor(Math.random() * canvas.height)
 
         }
 
-}
+    }
 function dragons3() {
 
     for (let i = 0; i < 11; i++){
@@ -102,7 +102,7 @@ dragons3()
 dragons4()
 dragons5()
 
-
+// food player eats to score
 const food = new Crawler(300,300, 'yellow', 30, 30)
 const food2 = new Crawler(1000 ,Math.floor(Math.random() * canvas.height), 'yellow', 30, 30)
 const food3 = new Crawler(1250, Math.floor(Math.random() * canvas.height), 'yellow', 30, 30)
@@ -111,7 +111,7 @@ function drawBox(x , y, w, h, color) {
     ctx.fillRect(x, y, w, h)
     }
 
-//handle listeners
+//control dragon
 function movementHandler(e) {
     const speed = 10
 
@@ -130,6 +130,7 @@ function movementHandler(e) {
         break
     }
 }
+//detect collision with food and finish line
 function detectcol() {
 
     if(goodDragon.x + goodDragon.width >= food.x &&
@@ -159,7 +160,7 @@ function detectcol() {
     {
         //score += 100
         food3.alive = false
-        movementDisplay.innerText = 'mmmmm'
+        movementDisplay.innerText = 'aaaaa'
     }
     if (goodDragon.x >finishLine.x && goodDragon.alive == true){
         movementDisplay.innerText = 'you win'
@@ -188,13 +189,15 @@ function detectcol() {
 
 
 
-
+// detect collision with wall
 function wallCol() {
-    if (goodDragon.y > canvas.height - 30 || goodDragon.y < 0){
+    if (goodDragon.y > canvas.height - 30 || goodDragon.y < 0 || goodDragon.x < 0 || goodDragon.x > canvas.width){
         goodDragon.alive = false
-        movementDisplay.innerText = 'lose'
+        movementDisplay.innerText = 'try again'
+        score = 0
     }
 }
+//detect collision with dragons
 function detectDragons() {
     for (let i = 0; i < dragonArray.length; i++){
         if(goodDragon.x + goodDragon.width >= dragonArray[i].x &&
@@ -202,8 +205,9 @@ function detectDragons() {
             goodDragon.y + goodDragon.height >= dragonArray[i].y &&
             goodDragon.y <= dragonArray[i].y + dragonArray[i].height
         ){
-            movementDisplay.innerText = 'lose'
+            movementDisplay.innerText = 'try again'
             goodDragon.alive = false
+            score = 0
 
         }
     }
@@ -251,8 +255,7 @@ function gameLoop(){
     }
     //goodDragon.y += 1
     scoreDisplay.innerText = score
-    detectcol()
-    detectDragons()
+
 
 if( food.alive === false) {
     score = 100
@@ -276,6 +279,8 @@ if( food.alive === false && food2.alive === false && food3.alive === false){
     score = 300
 }
 wallCol()
+detectcol()
+detectDragons()
 }
 
 canvas.addEventListener('click', e => {
