@@ -2,6 +2,8 @@
 
 welcome to Dragon Flight!
 
+https://gianlorenzodercole.github.io/dragon_flight/
+
 This is an infinite flight game where the player navigates a dragon around the screen dodging other dragons and collecting food.
 
 If you make it to the end of the flight you win!
@@ -13,7 +15,8 @@ I plan to use html canvas
 
 # wireframe
 
-[wireframe](./images/wf.png)
+
+![wireframe](./images/wf.png)
 
 
 
@@ -32,7 +35,7 @@ I plan to use html canvas
 + Notify player when game is over
 
 
-# Stretch 
+# Stretch
 
 + add one point when player collides with food
 
