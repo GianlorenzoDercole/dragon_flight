@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 const canvas = document.querySelector('#canvas')
 
 const movementDisplay = document.querySelector('#movement')
@@ -13,8 +8,18 @@ const scoreDisplay = document.querySelector('#score')
 const ctx = canvas.getContext('2d')
 canvas.setAttribute('height', getComputedStyle(canvas)["height"])
 canvas.setAttribute('width', getComputedStyle(canvas)["width"])
-
+// runs game
 const gameLoopInterval = setInterval(gameLoop, 60)
+
+
+
+
+
+
+
+
+
+
 
 
 class Crawler {
@@ -32,6 +37,7 @@ class Crawler {
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
+// builds dragon
 class Dragon {
     constructor(x, y, width, height) {
         this.x = x
@@ -39,7 +45,7 @@ class Dragon {
 
         const image = new Image()
 
-        image.src = './images/d.png'
+        image.src = './images/d2.png'
 
         this.image = image
         this.height = 30
@@ -54,6 +60,7 @@ class Dragon {
         // console.log(this.image)
     }
 }
+
 class Baddragon {
     constructor(x, y, width, height) {
         this.x = x
@@ -61,7 +68,7 @@ class Baddragon {
 
         const image = new Image()
 
-        image.src = './images/bd.png'
+        image.src = './images/bd2.png'
 
         this.image = image
         this.height = 30
@@ -83,7 +90,7 @@ class Fire {
 
         const image = new Image()
 
-        image.src = './images/fi.png'
+        image.src = './images/fi2.png'
 
         this.image = image
         this.height = 30
@@ -105,7 +112,7 @@ class Food {
 
         const image = new Image()
 
-        image.src = './images/f.png'
+        image.src = './images/f2.png'
 
         this.image = image
         this.height = 30
@@ -120,8 +127,9 @@ class Food {
         // console.log(this.image)
     }
 }
+// main player
 const dragon = new Dragon(300, 150)
-//myGamePiece = new component(30, 30, "smiley.gif", 10, 120, "image");
+//fire balls
 const flames = new Fire(dragon.x, dragon.y)
 
 flames.alive = false
@@ -130,15 +138,11 @@ const goodDragon = new Crawler(5, 250, 'white', 30, 30)
 const randX = Math.floor(Math.random() * canvas.width)
 const randY = Math.floor(Math.random() * canvas.height)
 
-    // function generate_dragon(){
-    //     const randX = Math.floor(Math.random() * canvas.width)
-    //     const randY = Math.floor(Math.random() * canvas.height)
-    //     const new_dragon = new Crawler(randX, randY, 'green', 30, 30)
 
-    // }
-    // generate_dragon()
     const finishLine = new Crawler((canvas.width + 11000), 0, 'white', 30, canvas.height )
     const dragonArray = []
+
+    // make dragons
     function dragons() {
 
             for (let i = 0; i < 11; i++){
@@ -200,7 +204,7 @@ dragons3()
 dragons4()
 dragons5()
 
-
+// food
 const food = new Food(300,300)
 const food2 = new Food(1000 ,Math.floor(Math.random() * canvas.height))
 const food3 = new Food(1250, Math.floor(Math.random() * canvas.height))
@@ -209,7 +213,7 @@ function drawBox(x , y, w, h, color) {
     ctx.fillRect(x, y, w, h)
     }
 
-//handle listeners
+// controls
 function movementHandler(e) {
     const speed = 10
 
@@ -238,14 +242,7 @@ function movementHandler(e) {
 }
 
 
-
-
-
-
-
-
-
-
+// food and finish line collision
 function detectcol() {
 
     if(dragon.x + dragon.width >= food.x &&
@@ -284,27 +281,7 @@ function detectcol() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// wall collision
 function wallCol() {
     if (dragon.y > canvas.height - 30 || dragon.y < 0 || dragon.x < 0 || dragon.x > canvas.width){
         dragon.alive = false
@@ -312,18 +289,42 @@ function wallCol() {
         score = 0
     }
 }
+
+// dragon collision
 function detectDragons() {
     for (let i = 0; i < dragonArray.length; i++){
-        if(dragon.x + dragon.width >= dragonArray[i].x &&
-            dragon.x <= dragonArray[i].x + dragonArray[i].width&&
-            dragon.y + dragon.height >= dragonArray[i].y &&
-            dragon.y <= dragonArray[i].y + dragonArray[i].height
-        ){
-            movementDisplay.innerText = 'try again'
-            dragon.alive = false
-            score = 0
+        if(dragonArray[i].alive == true){
+            if(dragon.x + dragon.width >= dragonArray[i].x &&
+                dragon.x <= dragonArray[i].x + dragonArray[i].width&&
+                dragon.y + dragon.height >= dragonArray[i].y &&
+                dragon.y <= dragonArray[i].y + dragonArray[i].height
+            ){
+                movementDisplay.innerText = 'try again'
+                dragon.alive = false
+                score = 0
 
+            }
         }
+
+    }
+
+}
+// fire collision
+function detectFire() {
+    for (let i = 0; i < dragonArray.length; i++){
+        if (flames.alive == true && dragonArray[i].alive == true){
+            if(flames.x + flames.width >= dragonArray[i].x &&
+                flames.x <= dragonArray[i].x + dragonArray[i].width&&
+                flames.y + flames.height >= dragonArray[i].y &&
+                flames.y <= dragonArray[i].y + dragonArray[i].height
+            ){
+                dragonArray[i].alive = false
+                flames.alive = false
+
+
+            }
+        }
+
     }
 
 }
@@ -359,7 +360,7 @@ function gameLoop(){
     food3.x -= 1
 
     for (let i = 0 ; i < dragonArray.length; i++){
-        if(dragon.alive == true){
+        if(dragon.alive == true && dragonArray[i].alive == true){
             dragonArray[i].render()
         dragonArray[i].x -= 10
         }
@@ -406,7 +407,7 @@ if (flames.alive == true){
 if (flames.x > canvas.width){
     flames.alive = false
 }
-
+detectFire()
 
 
 }
