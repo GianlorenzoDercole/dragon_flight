@@ -1,13 +1,13 @@
 # Dragon Flight
 
-welcome to Dragon Flight!
+Welcome to Dragon Flight!
 
 https://gianlorenzodercole.github.io/dragon_flight/
 
 This is a flight game where the player navigates a dragon around the screen dodging other dragons and
 collecting food.
 
-Eat food on the way to score.
+Eat food along the way to score.
 
 If you make it to the finish line you win!
 
@@ -15,12 +15,12 @@ press w for up, s for down, a for left and d for right ... pst (don't tell anyon
 
 # Aproach
 
-My approach to building this game was to start with basic functionality including directing the player, generating enemies and detecting collision.  One the bulk of the game was up and running I began to think more about how fast characters should move, how many enemies there should be and how they should look.  Then I started adding extra styling and slowed down the movement of the fruit.  Finally, I added the easter egg... the dragon breathes fire!
-# tech stack
+My approach to building this game was to start with basic functionality including directing the player, generating enemies and fruit and detecting collision.  Once the bulk of the game was up and running I began to think more about how fast characters should move, how many enemies there should be and how they should look.  Then I started adding extra styling and slowed down the movement of the fruit.  Finally, I added the easter egg... the dragon breathes fire!
+# Tech stack
 
 This game uses html, css and javascript.
 The game is built using html canvas.
-No dragons were harmed in the making of this game.
+
 
 # wireframe
 
@@ -56,7 +56,7 @@ No dragons were harmed in the making of this game.
 
 I really enjoyed building this project.  There were a few small roadblocks that I encountered, but nothing to difficult.
 
-One aspect of building the game that was suprisingly difficult was adding the animation to the game, I was bery happy with the way it turned out.
+One aspect of building the game that was suprisingly challenging was adding the animation to the game.  I was very happy with the way it turned out.
 
 I feel that my syling abilities improved during the course of this project.
 
