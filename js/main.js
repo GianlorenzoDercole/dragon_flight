@@ -1,4 +1,4 @@
-
+//////////////////////////////////
 
 const canvas = document.querySelector('#canvas')
 
@@ -12,13 +12,7 @@ canvas.setAttribute('width', getComputedStyle(canvas)["width"])
 const gameLoopInterval = setInterval(gameLoop, 60)
 
 
-
-
-
-
-
-
-
+message = document.querySelector('#btm-right')
 
 
 
@@ -412,6 +406,52 @@ detectFire()
 
 }
 
+message.addEventListener('click', e => {
+    movementDisplay.innerText = "I'm hungry"
+    dragon.alive = true
+    dragon.render()
+    food.alive = false
+    food2.alive = false
+    food3.alive = false
+    score = 0
+    for (let i = 0 ; i < dragonArray.length; i++){
+        dragonArray[i].alive = false
+        }
+    dragons()
+    dragons2()
+    dragons3()
+    dragons4()
+    dragons5()
+
+    dragon.x = 100
+    dragon.y = 100
+
+    // food.x = 300
+    // food.y = 300
+    //const food = new Food(300,300)
+    food.alive = true
+    food.x = 300
+    food.y = 300
+    food.render()
+    food2.alive = true
+    food2.x = 1000
+    food.y = Math.floor(Math.random() * canvas.height)
+    food2.y = Math.floor(Math.random() * canvas.height)
+    food2.render()
+    food3.alive = true
+    food3.x = 1250
+    food3.y = Math.floor(Math.random() * canvas.height)
+    food3.render()
+    finishLine.x = canvas.width + 11000
+    finishLine.alive = true
+    finishLine.render()
+    // const red = Math.floor(Math.random() * 250)
+    // const blue = Math.floor(Math.random() * 250)
+    // const green = Math.floor(Math.random() * 250)
+    // const rgb = `rgb(${red},${green},${blue})`
+    // drawBox(e.offsetX, e.offsetY, 30, 30, 'red')
+
+})
 canvas.addEventListener('click', e => {
     // const red = Math.floor(Math.random() * 250)
     // const blue = Math.floor(Math.random() * 250)
