@@ -21,12 +21,14 @@ My approach to building this game was to start with basic functionality includin
 This game uses html, css and javascript.
 The game is built using html canvas.
 
+HTML canvas is a popular tool used for making games, animations and data visualization among other things.
+
 
 # wireframe
 
 
 ![wireframe](./images/wf.png)
-
+![wireframe](./images/fl.png)
 
 
 # MVP
